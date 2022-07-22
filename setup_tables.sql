@@ -6,7 +6,7 @@ CREATE TABLE `OWNER` (
     `City` VARCHAR(20) NOT NULL,
     `Province` VARCHAR(20) NOT NULL,
     `Postal_Code` CHAR(7) NOT NULL,
-    `Phone` CHAR(11),
+    `Phone` CHAR(12),
     PRIMARY KEY (`Owner_Id`)
 );
 
@@ -14,10 +14,10 @@ CREATE TABLE `PATIENT` (
     `Patient_Id` INT NOT NULL,
     `Name` VARCHAR(20) NOT NULL,
     `Species` ENUM('Feline', 'Canine') NOT NULL,
-    `Breed` VARCHAR(10),
-    `Birthdate` DATE NOT NULL CHECK (`Birthdate` < '1990-01-01'),
-    `Weight` VARCHAR(10) NOT NULL CHECK (`Weight` > 0 AND `Weight` < 150),
-    `Color_Mark` VARCHAR(10),
+    `Breed` VARCHAR(30),
+    `Birthdate` DATE NOT NULL CHECK (`Birthdate` > '1990-01-01'),
+    `Weight` DEC(4,2) NOT NULL CHECK (`Weight` > 00.00 AND `Weight` < 99.00),
+    `Color_Mark` VARCHAR(30),
     `Microchip` CHAR(15),
     `Rabies_Tag` CHAR(8),
     `Gender` ENUM('M', 'F'),
@@ -36,7 +36,7 @@ CREATE TABLE `PATIENT` (
 
 CREATE TABLE `ACTION` (
     `Code` VARCHAR(8) NOT NULL,
-    `Category` VARCHAR(10) NOT NULL,
+    `Category` VARCHAR(30) NOT NULL,
     `Description` VARCHAR(30),
     PRIMARY KEY (`Code`)
 );
@@ -73,8 +73,8 @@ CREATE TABLE `EMPLOYEE` (
     `City` VARCHAR(20) NOT NULL,
     `Province` VARCHAR(20) NOT NULL,
     `Postal_Code` CHAR(7) NOT NULL,
-    `Phone` CHAR(11),
-    `Birthdate` DATE NOT NULL CHECK (`Birthdate` < '1900-01-01'),
+    `Phone` CHAR(12),
+    `Birthdate` DATE NOT NULL CHECK (`Birthdate` > '1900-01-01'),
     `Gender` ENUM('M', 'F'),
     PRIMARY KEY (`SIN`)
 );
