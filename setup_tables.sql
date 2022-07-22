@@ -13,28 +13,25 @@ CREATE TABLE `OWNER` (
 CREATE TABLE `PATIENT` (
     `Patient_Id` INT NOT NULL,
     `Name` VARCHAR(20) NOT NULL,
-    `Species` VARCHAR(10) NOT NULL,
+    `Species` ENUM('Feline', 'Canine') NOT NULL,
     `Breed` VARCHAR(10),
-    `Birthdate` DATE NOT NULL,
+    `Birthdate` DATE NOT NULL CHECK (`Birthdate` < '1990-01-01'),
     `Weight` VARCHAR(10) NOT NULL CHECK (`Weight` > 0 AND `Weight` < 150),
     `Color_Mark` VARCHAR(10),
     `Microchip` CHAR(15),
     `Rabies_Tag` CHAR(8),
+    `Gender` ENUM('M', 'F'),
+    `Primary_Owner` INT NOT NULL,
+    `Secondary_Owner` INT,
     PRIMARY KEY (`Patient_Id`),
-    UNIQUE KEY (`Microchip`),
-    UNIQUE KEY (`Rabies_Tag`)
-);
-
-CREATE TABLE `PATIENT_OWNER` (
-    `Patient_Id` INT NOT NULL,
-    `Owner_Id` INT NOT NULL,
-    PRIMARY KEY (`Patient_Id` , `Owner_Id`),
-    FOREIGN KEY (`Owner_Id`)
+    FOREIGN KEY (`Primary_Owner`)
         REFERENCES `OWNER` (`Owner_Id`)
         ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (`Patient_Id`)
-        REFERENCES `PATIENT` (`Patient_Id`)
-        ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (`Secondary_Owner`)
+        REFERENCES `OWNER` (`Owner_Id`)
+        ON DELETE SET NULL ON UPDATE CASCADE,
+    UNIQUE KEY (`Microchip`),
+    UNIQUE KEY (`Rabies_Tag`)
 );
 
 CREATE TABLE `ACTION` (
@@ -77,8 +74,8 @@ CREATE TABLE `EMPLOYEE` (
     `Province` VARCHAR(20) NOT NULL,
     `Postal_Code` CHAR(7) NOT NULL,
     `Phone` CHAR(11),
-    `Birthdate` DATE NOT NULL,
-    `Gender` CHAR(1),
+    `Birthdate` DATE NOT NULL CHECK (`Birthdate` < '1900-01-01'),
+    `Gender` ENUM('M', 'F'),
     PRIMARY KEY (`SIN`)
 );
 
