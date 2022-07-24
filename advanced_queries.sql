@@ -10,9 +10,9 @@ WHERE
         AND a.Schedule > '2021-08-01 00:00:00'
         AND a.Schedule < '2021-08-01 23:59:59';
 
-# Find the name of all patients who was examined by Dr x on Aug 1, 2021
+# Find the name of all patients who was examined by Dr x on Aug 1, 2021 (Using nested queries)
 SELECT DISTINCT
-    p.Patient_Id, p.Name
+    p.*
 FROM
     patient AS p
         JOIN
@@ -42,3 +42,23 @@ FROM
     `action` AS ac ON cd.Cond_code = ac.`Code`
 WHERE
     ac.Description = 'Pancreatitis';
+    
+# Find all info on patients with Primary Owner x (searched by name instead of id)
+SELECT
+	p.*
+FROM
+	patient AS p
+		JOIN
+	owner AS o ON p.Primary_Owner = o.Owner_Id
+WHERE
+	o.name = "Shane M Woodfin";
+
+# Find all info on dvms who Specializes in x 
+SELECT
+	e.*
+FROM
+	employee AS e
+		JOIN
+	dvm AS d ON e.SIN = d.DVM_Id
+WHERE
+	d.Specialization = "Dentist";
