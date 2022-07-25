@@ -62,3 +62,32 @@ FROM
 	dvm AS d ON e.SIN = d.DVM_Id
 WHERE
 	d.Specialization = "Dentist";
+
+# Find names of patients and DVM under appointments
+SELECT a.*, p.name AS Patient_Name, e.name AS DVM_Name
+FROM 
+	appointment AS a
+		JOIN
+	patient AS p ON a.Patient_Id = p.Patient_Id
+		JOIN
+	employee AS e ON a.DVM_Id = e.SIN;
+
+# Find all appointments booked for Dr x
+SELECT a.*, p.name AS Patient_Name, e.name AS DVM_Name
+FROM 
+	appointment AS a
+		JOIN
+	patient AS p ON a.Patient_Id = p.Patient_Id
+		JOIN
+	employee AS e ON a.DVM_Id = e.SIN
+WHERE 
+	e.name = "Stacie S Lee";
+
+# Find all appointments booked by Staff member x    
+SELECT a.*, e.name AS Staff_Name
+FROM
+	appointment AS a
+		JOIN
+	employee AS e ON a.Staff_Id = e.SIN
+WHERE 
+	e.name = "Jacob J Talkington";
