@@ -22,3 +22,6 @@ SELECT * FROM action WHERE Code = "FUSO";
 SELECT * FROM item;
 SELECT * FROM treatment;
 SELECT * FROM `condition`;
+
+SELECT * FROM appointment;
+SELECT * FROM appointment WHERE Patient_Id = 2;
