@@ -5,7 +5,7 @@ VALUES
     (3, "Allen S Farmer", "4117", "Russell Avenue", "White Rock", "British Columbia", "V4B 3E1", "604-541-7232"),
     (4, "Hilda K Nolan", "2993", "Churchill Plaza", "Sault Ste Marie", "Ontario", "P6A 1Z2", "705-941-9466"),
     (5, "Alfred M Kelly", "4726", "Water Street", "Kitchener", "Ontario", "N2H 5A5", "519-744-9428");
-
+    
 INSERT INTO `PATIENT` (`Patient_Id`,`Name`,`Species`,`Breed`,`Birthdate`,`Weight`,`Color_Mark`,`Microchip`,`Rabies_Tag`,`Gender`,`Primary_Owner`,`Secondary_Owner`)
 VALUES 
 	(1,'Coco','Canine','Bulldog','2020-05-23',20.03,'White','1234567890ABCDE','12345678','F',1,2),
@@ -35,28 +35,45 @@ VALUES
 
 INSERT INTO `ACTION`(`Code`,`Category`,`Description`)
 VALUES
+	("na", "Not applicable", "Not applicable"),
 	("SC", "blood test", "Superchem"),
 	("Ex", "Exam", "Examination"),
+    ("Hy", "Healthy", "Healthy"),
     ("Panc", "Endocrine disease", "Pancreatitis"),
     ("Hm", "Cardiopathology", "Heart murmur"),
+    ("opht", "Keratitis", "Ophthalmology"),
+    ("Metr", "Metritis", "Ginecology"),
+    ("Hem", "Hemorrhage", "Trauma"),
     ("FUSO", "Diet", "Feline urinary SO"),
-    ("Lant", "Medication", "Lantus");
+    ("Lant", "Medication", "Lantus"),
+    ("Metac", "Metacam", "Medication"),
+    ("Sham", "Shampoo", "Grooming"),
+    ("Tobra", "Tobradex", "Medication");
 
 INSERT INTO `TREATMENT`
 VALUES
+	("na"),
 	("SC"),
     ("Ex");
 
 INSERT INTO `CONDITION`
 VALUES
 	("Panc"),
-    ("Hm");
+    ("Hm"),
+    ("Hy"),
+    ("opht"),
+    ("Metr"),
+    ("Hem");
 
 INSERT INTO `ITEM`
 VALUES
+	("na"),
 	("FUSO"),
-    ("Lant");
-    
+    ("Lant"),
+    ("Metac"),
+    ("Sham"),
+    ("Tobra");
+
 INSERT INTO `APPOINTMENT` (`Appoint_Id`,`Patient_Id`,`DVM_Id`,`Staff_Id`,`Reason`,`Schedule`)
 VALUES
 	(1,1,'603250932',"666433072","Tooth ache","2021-08-01 01:30:00"),
@@ -68,8 +85,34 @@ VALUES
     (7,3,'794309983',"543688019","Stomach ache","2021-10-15 01:30:00"),
     (8,4,'603250932',"666433072","Tooth decay","2021-11-05 03:00:00"),
     (9,5,'760436888',"543688019","Broken leg","2022-04-10 01:00:00");
+
+INSERT INTO `APPOINTMENT` (`Appoint_Id`,`Patient_Id`,`DVM_Id`,`Staff_Id`,`Schedule`)
+VALUES
+	(10,1,'603250932','666433072','2022-08-01 01:30:00');
     
 INSERT INTO `CONDITION_DIAGNOSED` (`Appoint_Id`,`Cond_code`,`Notes`)
 VALUES
+	(1, 'opht', 'xxx'),
+    (2, 'Hem', 'xxx'),
 	(4, 'Panc', 'xxx'),
-    (9, 'Panc', 'xxx');
+    (9, 'Panc', 'xxx'),
+    (9, 'opht', 'xxx'),
+    (8, 'Metr', 'xxx'),
+    (8, 'Hem', 'xxx'),
+    (7, 'Panc', 'xxx'),
+    (6, 'opht', 'xxx');
+    
+INSERT INTO `CONDITION_DIAGNOSED` (`Appoint_Id`,`Notes`)
+VALUES
+	(4, 'xxx');
+    
+INSERT INTO `ITEM_TREATMENT_PRESCRIBED` (`Appoint_Id`, `Item_code`, `Treat_code`, `Dosage_amount`, `Method`, `Frequency`, `Special_Inst`)
+VALUES
+	(1, "FUSO", "na", "xx", "xx", "xx", "xx"),
+    (2, "Lant", "na", "xx", "xx", "xx", "xx"),
+    (4, "Metac", "na", "xx", "xx", "xx", "xx"),
+    (9, "Metac", "na", "xx", "xx", "xx", "xx"),
+    (8, "Sham", "na", "xx", "xx", "xx", "xx"),
+    (8, "na", "SC", "xx", "xx", "xx", "xx"),
+    (7, "FUSO", "na", "xx", "xx", "xx", "xx"),
+    (6, "na", "Ex", "xx", "xx", "xx", "xx")
